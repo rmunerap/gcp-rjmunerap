@@ -1,14 +1,12 @@
 resource "google_compute_firewall" "allow_http" {
-  name    = "allow-http-bolivar"
-  network = google_compute_network.vpc_network.name
+  name    = "allow-http-${var.network_name}" # Nombre dinámico para evitar duplicados
+  network = var.network_name               # Usa la variable, no el recurso directo
 
   allow {
     protocol = "tcp"
     ports    = ["80"]
   }
 
-  source_ranges = ["0.0.0.0/0"] # Tráfico desde internet
-  
-  # ¿Cómo vinculas esta regla solo a las instancias con el tag 'http-server'?
-  target_tags   = [http-server] 
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["http-server"]
 }

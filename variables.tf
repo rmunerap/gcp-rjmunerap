@@ -1,13 +1,10 @@
 variable "project_id" {
-  description = "ID del proyecto en GCP"
+  description = "El ID del proyecto de Google Cloud"
   type        = string
-}
+  }
 
 variable "region" {
-  default = "us-east1"
-}
-
-provider "google" {
-  project = var.project_id
-  region  = var.region
+  description = "Región por defecto para los recursos"
+  type        = string
+  default     = "us-east1"
 }
